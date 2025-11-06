@@ -1,0 +1,22 @@
+Palavra          | Número 32-bit  | Hash Alvo
+-----------------|----------------|------------------------------------------------------------------
+bitcoin          | 1804124295     | 0xfb7bba17dd0728ff9e0f9cece5769ad3c5c4e3aff716d42cd5b1803f2b26a004
+satoshi          | 3660084915     | 0x1f9c10d3a53744b9d20f7841d1769e22227a58469323839d2c05856756199c7b
+nakamoto         | 2398038368     | 0x4c8fa2ee70ebd65d0ca51077ff59ee0d44f994015e444ed48012270d9a30e9e0
+blockchain       | 4017592289     | 0xe9d1f5f4f417ed46bae95403f05f21c6d24f069af34cf3d8ffb04b46c5147a06
+hodl             | 2008623617     | 0xf8752392bd7fc9901573f312492048091bb65110b2ae6e3ac47bb49d37b4c20d
+moon             | 2658710590     | 0xcfb3074bdc1bbc221d923cdd2c6a6b18908f77bf84a99042dddcfc38ebf9be67
+lambo            | 3162306131     | 0xe96f86d81cb96acd30ec504741801d951b0cbf939dcfbe13f3fb920215140214
+whale            | 2782047784     | 0x4ea833bdf72ce7a5ac512c3a8184eb30eaedf234c154b614eef0fe4425e14561
+mining           | 711794821      | 0xbc59a12dcb578fe983ba7bbf95e09556f5794b8cfcec72a2bcbb6813aa157afd
+crypto           | 3660515134     | 0xc404e1ff295546864e6017c8ebe32353c468e34d3bb4fcdc9e66f946819219da
+puzzle           | 3573260443     | 0x9b1e4346853ee5b344847c0c451664283fe1fff2845ab32ed5f8cc6774d4c05c
+treasure         | 1957573183     | 0x546e8c4967acd4a65ae5b6d4194f0e74dc4ebbe35b7c8cfc3d8a2824b08d9bb6
+simplicity       | 719343945      | 0x0a794c70288ae24635b19b6852606dcaa76632bee2eb3c6dba2a70816ea1d7da
+liquid           | 1108410722     | 0x7eed405263aae2ec6f4ca6211f64d7e1bef368d7c8ad1397ff20582d508dc26e
+elements         | 2964420755     | 0x0cdb18ef490ec13523af5f1ce2f61f33f1d5b942b8e67e38fce574b71fb01d73
+taproot          | 148329247      | 0xe4b0b67be6550369cac7976e90c949cb37ddc14e8adfce3d510efee25ff694dc
+segwit           | 2518994153     | 0xf50322b70209de6bf4e4c83b312166127d1a05398a101496da9de6ddb998991e
+lightning        | 31158699       | 0x2fcafda3779b1fe109e59eb3b3961d191c6e74b0defe0c345f485dd9338f867f
+halving          | 2317356837     | 0x3fb4ebc295552c2e59783c94d763ea0ed75c1656ba07d6ba86f570795a691526
+genesis          | 2934680906     | 0x57f801939ce6cae30bde6b99bf2e7d2fdfd2b77bb3d91503a92dbad5b1c23972

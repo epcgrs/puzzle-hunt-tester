@@ -1,0 +1,15 @@
+Puzzle 1:
+  Secret: 620150531
+  Hash:   0xc2349fb37c846efb607aae0edaa4c57daae130eddf8a65139199f73293e8c03b
+  Posição: 14.44% do range
+
+Puzzle 2:
+  Secret: 230363531
+  Hash:   0x7d8fa07877c1e051c091f76cb489df3eb2433927882e60919bd855b4a0950d37
+  Posição: 5.36% do range
+
+Puzzle 3:
+  Secret: 164742796
+  Hash:   0x1c9fda75346f7f5da02ab2b8e66aebc31554c69cbc923e13dcc714ae644d5e4e
+  Posição: 3.84% do range
+
