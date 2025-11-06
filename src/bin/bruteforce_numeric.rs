@@ -39,8 +39,24 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
+    // Detectar número máximo de threads disponíveis
+    let max_threads = std::thread::available_parallelism()
+        .map(|n| n.get())
+        .unwrap_or(1);
+
     // Configurar número de threads
-    if let Some(threads) = args.threads {
+    let requested_threads = args.threads.unwrap_or(max_threads);
+    
+    if requested_threads > max_threads {
+        eprintln!("⚠️  AVISO: Solicitado {} threads, mas sistema suporta apenas {}!", 
+                  requested_threads, max_threads);
+        eprintln!("   Usando {} threads (máximo disponível)", max_threads);
+        
+        rayon::ThreadPoolBuilder::new()
+            .num_threads(max_threads)
+            .build_global()
+            .unwrap();
+    } else if let Some(threads) = args.threads {
         rayon::ThreadPoolBuilder::new()
             .num_threads(threads)
             .build_global()
@@ -52,12 +68,14 @@ fn main() {
     let end = args.end;
     let total = end - start + 1;
 
+    let active_threads = rayon::current_num_threads();
+
     println!("🎯 BRUTEFORCE NUMÉRICO");
     println!("======================");
     println!("Target Hash: {}", target_hash);
     println!("Range: {} até {}", start, end);
     println!("Total: {} tentativas", total);
-    println!("Threads: {}", rayon::current_num_threads());
+    println!("Threads: {} / {} (usando / máximo)", active_threads, max_threads);
     println!("Chunk size: {}", args.chunk_size);
     println!();
 

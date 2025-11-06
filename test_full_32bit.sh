@@ -19,6 +19,18 @@ if [ ! -f "./target/release/bruteforce" ]; then
     cargo build --release
 fi
 
+# Detectar número de CPUs disponíveis
+if command -v nproc &> /dev/null; then
+    MAX_THREADS=$(nproc)
+elif command -v sysctl &> /dev/null; then
+    MAX_THREADS=$(sysctl -n hw.ncpu 2>/dev/null || echo "8")
+else
+    MAX_THREADS=8
+fi
+
+echo "💻 CPUs detectadas: $MAX_THREADS threads disponíveis"
+echo ""
+
 # Criar diretório de teste
 mkdir -p test_puzzles
 
@@ -66,10 +78,50 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
+# Perguntar configurações de threads
+echo -e "${BLUE}⚙️  CONFIGURAÇÃO DE THREADS${NC}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Threads disponíveis: $MAX_THREADS"
+echo ""
+echo "Opções:"
+echo "  1) Usar todas ($MAX_THREADS threads) - Máxima performance"
+echo "  2) Usar metade ($((MAX_THREADS / 2)) threads) - Deixa CPU livre"
+echo "  3) Usar 1 thread - Teste de performance single-thread"
+echo "  4) Número customizado"
+echo ""
+read -p "Escolha (1-4) [padrão: 1]: " THREAD_OPTION
+echo ""
+
+case $THREAD_OPTION in
+    2)
+        THREADS=$((MAX_THREADS / 2))
+        ;;
+    3)
+        THREADS=1
+        ;;
+    4)
+        read -p "Digite o número de threads (1-$MAX_THREADS): " CUSTOM_THREADS
+        if [[ "$CUSTOM_THREADS" =~ ^[0-9]+$ ]] && [ "$CUSTOM_THREADS" -ge 1 ] && [ "$CUSTOM_THREADS" -le "$MAX_THREADS" ]; then
+            THREADS=$CUSTOM_THREADS
+        else
+            echo "⚠️  Valor inválido. Usando todas as threads ($MAX_THREADS)"
+            THREADS=$MAX_THREADS
+        fi
+        ;;
+    *)
+        THREADS=$MAX_THREADS
+        ;;
+esac
+
+echo -e "${GREEN}✅ Usando $THREADS threads${NC}"
+echo ""
+
 # Perguntar se quer rodar os testes
 echo -e "${YELLOW}⚠️  ATENÇÃO: Os testes rodam no range COMPLETO (0 a 4.294.967.295)${NC}"
 echo -e "${YELLOW}   Tempo estimado: 5-25 minutos POR TESTE (depende da posição)${NC}"
 echo -e "${YELLOW}   Total estimado: 15-75 minutos para os 3 testes${NC}"
+echo -e "${YELLOW}   Com $THREADS threads, tempo pode variar proporcionalmente${NC}"
 echo ""
 read -p "Deseja executar os testes agora? (s/N): " -n 1 -r
 echo ""
@@ -81,7 +133,7 @@ if [[ ! $REPLY =~ ^[Ss]$ ]]; then
     echo "Para testar manualmente:"
     for i in {1..3}; do
         echo "  # Puzzle $i (${POSITIONS[$i]}% do range)"
-        echo "  ./target/release/bruteforce -t ${HASHES[$i]}"
+        echo "  ./target/release/bruteforce -t ${HASHES[$i]} -j $THREADS"
         echo ""
     done
     exit 0
@@ -112,8 +164,8 @@ for i in {1..3}; do
     # Capturar tempo de início
     START_TIME=$(date +%s)
     
-    # Executar bruteforce
-    OUTPUT_RESULT=$(./target/release/bruteforce -t "$HASH" 2>&1)
+    # Executar bruteforce com número de threads configurado
+    OUTPUT_RESULT=$(./target/release/bruteforce -t "$HASH" -j "$THREADS" 2>&1)
     EXIT_CODE=$?
     
     # Capturar tempo de fim

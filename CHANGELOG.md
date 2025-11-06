@@ -1,5 +1,27 @@
 # 📝 Changelog - Puzzle Entropy Tester
 
+## [0.1.1] - 2025-11-06
+
+### ✨ Novas Funcionalidades
+
+#### Controle Inteligente de Threads
+- ✅ Detecção automática de threads disponíveis no sistema
+- ✅ Validação automática (avisa se solicitar mais que o máximo)
+- ✅ Display melhorado: "X / Y (usando / máximo)"
+- ✅ Menu interativo no script de teste com 4 opções
+- ✅ Documentação completa em `THREADS.md`
+
+#### Script de Teste Full 32-bit
+- ✅ `test_full_32bit.sh` - Gera números aleatórios de 32 bits
+- ✅ Menu interativo para configuração de threads
+- ✅ Teste completo do range (0 a 4.294.967.295)
+- ✅ Estatísticas detalhadas de performance
+
+### 📚 Documentação
+- ✅ `THREADS.md` - Guia completo de configuração de threads
+- ✅ Exemplos práticos e comparações de performance
+- ✅ Recomendações por cenário de uso
+
 ## [0.1.0] - 2025-11-06
 
 ### ✨ Funcionalidades Implementadas
